@@ -12,5 +12,6 @@ namespace Pokedex.Code.Services.Interfaces
         Task<object> GetPokemonsAsync();
         Task<object> GetPokemon(int id);
         Task<object> GetPokemon(string name);
+        Task<object> GetSpecies(string id);
     }
 }

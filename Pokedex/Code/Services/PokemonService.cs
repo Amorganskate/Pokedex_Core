@@ -50,6 +50,29 @@ namespace Pokedex.Code.Services
 
         public async Task<object> GetPokemon(string name)
         {
+            var request = new RestRequest("pokemon/" + name);
+
+            var response = await _client.ExecuteAsync<JsonResult>(request);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return response.Content;
+            }
+
+            return null;
+        }
+
+        public async Task<object> GetSpecies(string id)
+        {
+            var request = new RestRequest("pokemon-species/" + id);
+
+            var response = await _client.ExecuteAsync<JsonResult>(request);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return response.Content;
+            }
+
             return null;
         }
     }

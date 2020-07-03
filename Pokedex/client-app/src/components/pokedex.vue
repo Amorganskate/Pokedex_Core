@@ -65,7 +65,6 @@
         mounted() {
             this.get_pokemon();
             this.get_species();
-            console.log(this.pokemon);
         }
     }
 </script>

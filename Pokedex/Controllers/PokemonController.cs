@@ -17,19 +17,40 @@ namespace Pokedex.Controllers
         private const string BaseUrl = "https://pokeapi.co/api/v2/";
         PokemonService service = new PokemonService(new RestClient(BaseUrl));
 
-        [Route("")]
-        [Route("GetPokemon")]
+        
         [HttpGet]
         public async Task<ActionResult<object>> GetPokemon()
         {
-            return service.GetPokemonsAsync().Result;
+            
+            var result = await service.GetPokemonsAsync();
+
+            return result;
         }
 
-        [Route("GetPokemonById")]
-        [HttpGet]
-        public async Task<ActionResult<object>> GetPokemonById(int id)
+        [Route("GetPokemonByID")]
+        public async Task<ActionResult<object>> GetPokemon(int id)
         {
-            return service.GetPokemon(id).Result;
+            var result = await service.GetPokemon(id);
+
+            return result;
+        }
+
+        [Route("species")]
+        [HttpGet]
+        public async Task<ActionResult<object>> GetSpecies(string id)
+        {
+            var result = await service.GetSpecies(id);
+
+            return result;
+        }
+
+        [Route("GetPokemonByName")]
+        [HttpGet]
+        public async Task<ActionResult<object>> GetPokemonByName(string name)
+        {
+            var result = await service.GetPokemon(name);
+
+            return result;
         }
     }
 }
