@@ -19,12 +19,14 @@
     "shelljs": "^0.8.4",
     "vue": "^2.6.11",
     "vue-router": "^3.3.2",
-    "vuetify": "^2.2.34"
+    "vuetify": "^2.2.34",
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.4.6",
     "@vue/cli-plugin-eslint": "^4.4.6",
     "@vue/cli-plugin-router": "^4.4.6",
+    "@vue/cli-plugin-vuex": "^4.4.6",
     "@vue/cli-service": "^4.4.6",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",

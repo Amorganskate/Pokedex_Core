@@ -24,7 +24,7 @@
 <script>
     import { RepositoryFactory } from '@/repositorys/RepositoryFactory'
     import search from '@/components/pokemon_search'
-
+    import { mapGetters, mapActions } from 'vuex'
     const PokemonRepository = RepositoryFactory.get('pokemon')
     export default {
         props: ["new_pokemon"],
@@ -32,11 +32,9 @@
         components: {
             search
         },
-
+        computed: mapGetters(['pokemon']),
         data: () => ({
             pokemon_id: 1,
-            pokemon: null,
-            species: null,
             search: '',
 
         }),
@@ -46,16 +44,14 @@
             }
         },
         methods: {
+            ...mapActions(['fetchPokemonByName', 'fetchSpecies']),
             async get_pokemon() {
-                const { data } = await PokemonRepository.get_pokemon(this.pokemon_id)
-                this.pokemon = data;
+                await this.fetchPokemonByName(this.pokemon_id)
             },
             async get_species() {
-                const { data } = await PokemonRepository.get_species(this.pokemon_id)
-                this.species = data;
+                await PokemonRepository.get_species(this.pokemon_id)
             },
             change_pokedex_pokemon(pokemon) {
-                Object.assign(this.pokemon, pokemon);
                 this.pokemon_id = pokemon.id;
                 this.get_species();
 

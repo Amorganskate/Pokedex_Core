@@ -3,7 +3,6 @@ import Repository from "./Repository";
 const resource = "/pokemon";
 export default {
     get_pokemon(id) {
-        console.log(id);
         return Repository.get(`${resource}/GetPokemonByID?id=${id}`);
     },
     get_species(id){

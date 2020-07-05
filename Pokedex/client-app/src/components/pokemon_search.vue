@@ -3,34 +3,34 @@
 </template>
 <script>
 import { RepositoryFactory } from '@/repositorys/RepositoryFactory'
-const PokemonRepository = RepositoryFactory.get('pokemon')
 const PokedexRepository = RepositoryFactory.get('pokedex')
+import {  mapActions, mapGetters} from 'vuex'
 export default {
     props:["change_pokedex_pokemon"],
     data: () => ({
         search: '',
         is_loading: false,
-        pokedex: [],
-        pokemon: '',
-    }),
+        }),
+    computed: mapGetters(['pokedex', 'pokemon']),
     methods:{
+        ...mapActions(['fetchPokemon', 'fetchPokemonByName']),
         async search_pokemon(){
-            const { data } = await PokemonRepository.get_pokemon_by_name(this.search.toLowerCase())
-            this.pokemon = data;
+            console.log(this.fetchPokemonByName)
+            this.pokemon = this.fetchPokemonByName(this.search.toLowerCase());
+            
             this.change_pokedex_pokemon(this.pokemon);
       },
-      async get_pokedex() {
-        this.is_loading = true;
-        const { data } = await PokedexRepository.get_pokedex();
+        async get_pokedex() {
+            this.is_loading = true;
+            this.pokedex = await PokedexRepository.get_pokedex().pokemon_entries;
 
-        this.pokedex = data.pokemon_entries;
-        this.is_loading = false;
+            this.is_loading = false;
 
         },
 
     },
     mounted(){
-        this.get_pokedex()
+        this.fetchPokemon();
     }
 };
 </script>
